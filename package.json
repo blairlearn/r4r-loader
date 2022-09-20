@@ -28,11 +28,11 @@
   },
   "homepage": "https://github.com/bryanpizzillo/r4rimporter#readme",
   "dependencies": {
+    "@elastic/elasticsearch": "^7.17.0",
     "@octokit/rest": "^19.0.4",
     "axios": "^0.27.2",
     "config": "^3.3.8",
-    "elastic-tools": "git+https://github.com/nciocpl/elastic-tools.git#1.0.0",
-    "elasticsearch": "^14.2.2",
+    "elastic-tools": "github:blairl-nih/elastic-tools#ticket/7-es-client",
     "gray-matter": "^4.0.3",
     "loader-pipeline": "git+https://github.com/nciocpl/loader-pipeline.git#v1.1.0",
     "moment": "^2.29.4",
