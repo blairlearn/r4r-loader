@@ -45,6 +45,7 @@ jobs:
             {
               \"pipeline\": {
                   \"source\": {
+                      \"module\": \"./lib/sources/github-resource-source\",
                       \"config\": {
                           \"repoUrl\": \"${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}\",
                           \"branchName\": \"${GITHUB_REF}\",
@@ -56,6 +57,7 @@ jobs:
                   },
                   \"transformers\": [
                       {
+                          \"module\": \"./lib/transformers/netlifymd-resource-transformer\",
                           \"config\": {
                             \"mappingUrls\": {
                                 \"docs\": \"https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_REF}/integration-tests/data/data/docs.json\",
@@ -67,6 +69,7 @@ jobs:
                       }
                   ],
                   \"loader\": {
+                      \"module\": \"./lib/loaders/elastic-resource-loader\",
                       \"config\": {
                         \"eshosts\": [ \"http://localhost:${{ job.services.elasticsearch.ports[9200] }}\" ],
                         \"daysToKeep\": 10,
