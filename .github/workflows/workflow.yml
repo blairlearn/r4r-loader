@@ -43,7 +43,7 @@ jobs:
           echo "                ES Port: ${{ job.services.elasticsearch.ports[9200] }}"
 
 
-          echo -e $CONFIG_OVERRIDE
+          echo -e "Multi-line ${multi-line}"
 
 
 
