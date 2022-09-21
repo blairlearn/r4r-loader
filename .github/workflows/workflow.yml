@@ -120,19 +120,6 @@ jobs:
                           }
                       }
                   },
-                  \"transformers\": [
-                      {
-                          \"module\": \"./lib/transformers/netlifymd-resource-transformer\",
-                          \"config\": {
-                            \"mappingUrls\": {
-                                \"docs\": \"https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/blob/${GITHUB_SHA}/integration-tests/data/data/docs.json\",
-                                \"researchAreas\": \"https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/blob/${GITHUB_SHA}/integration-tests/data/data/researchAreas.json\",
-                                \"researchTypes\": \"https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/blob/${GITHUB_SHA}/integration-tests/data/data/researchTypes.json\",
-                                \"toolTypes\": \"https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/blob/${GITHUB_SHA}/integration-tests/data/data/toolTypes.json\"
-                            }
-                          }
-                      }
-                  ],
                   \"loader\": {
                       \"module\": \"./lib/loaders/elastic-resource-loader\",
                       \"config\": {
