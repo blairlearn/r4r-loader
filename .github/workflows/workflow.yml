@@ -18,6 +18,9 @@ jobs:
   informer:
     name: Get some info
     runs-on: ubuntu-latest
+    env:
+      multi-line: |
+        I can has "quotes"?
     services:
       elasticsearch:
         image: elasticsearch:7.9.2
@@ -122,6 +125,49 @@ jobs:
     name: Run Integration Tests (Linux)
     runs-on: ubuntu-latest
     needs: test
+
+    env:
+      NODE_CONFIG: |
+            {
+              \"pipeline\": {
+                  \"source\": {
+                      \"module\": \"./lib/sources/github-resource-source\",
+                      \"config\": {
+                          \"repoUrl\": \"${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}\",
+                          \"branchName\": \"${GITHUB_REF}\",
+                          \"resourcesPath\": \"/integration-tests/data/resources\",
+                          \"authentication\": {
+                              \"token\": \"${GITHUB_TOKEN}\"
+                          }
+                      }
+                  },
+                  \"transformers\": [
+                      {
+                          \"module\": \"./lib/transformers/netlifymd-resource-transformer\",
+                          \"config\": {
+                            \"mappingUrls\": {
+                                \"docs\": \"https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_REF}/integration-tests/data/data/docs.json\",
+                                \"researchAreas\": \"https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_REF}/integration-tests/data/data/researchAreas.json\",
+                                \"researchTypes\": \"https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_REF}/integration-tests/data/data/researchTypes.json\",
+                                \"toolTypes\": \"https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_REF}/integration-tests/data/data/toolTypes.json\"
+                            }
+                          }
+                      }
+                  ],
+                  \"loader\": {
+                      \"module\": \"./lib/loaders/elastic-resource-loader\",
+                      \"config\": {
+                        \"eshosts\": [ \"http://localhost:${{ job.services.elasticsearch.ports[9200] }}\" ],
+                        \"daysToKeep\": 10,
+                        \"aliasName\": \"r4r_v1\",
+                        \"mappingPath\": \"es-mappings/mappings.json\",
+                        \"settingsPath\": \"es-mappings/settings.json\"
+                      }
+                  }
+              }
+            }
+
+
     services:
       elasticsearch:
         image: elasticsearch:7.17.5
