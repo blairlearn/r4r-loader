@@ -112,14 +112,27 @@ jobs:
                   \"source\": {
                       \"module\": \"./lib/sources/github-resource-source\",
                       \"config\": {
-                          \"repoUrl\": \"${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}\",
-                          \"branchName\": \"${GIT_SHA}\",
+                          \"repoUrl\": \"https://github.com/nciocpl/r4r-loader\",
+                          \"branchName\": \"ticket/8-es-update\",
                           \"resourcesPath\": \"/integration-tests/data/resources\",
                           \"authentication\": {
                               \"token\": \"${GITHUB_TOKEN}\"
                           }
                       }
                   },
+                  \"transformers\": [
+                      {
+                          \"module\": \"./lib/transformers/netlifymd-resource-transformer\",
+                          \"config\": {
+                            \"mappingUrls\": {
+                                \"docs\": \"https://raw.githubusercontent.com/nciocpl/r4r-content/master/data/docs.json\",
+                                \"researchAreas\": \"https://raw.githubusercontent.com/nciocpl/r4r-content/master/data/researchAreas.json\",
+                                \"researchTypes\": \"https://raw.githubusercontent.com/nciocpl/r4r-content/master/data/researchTypes.json\",
+                                \"toolTypes\": \"https://raw.githubusercontent.com/nciocpl/r4r-content/master/data/toolTypes.json\"
+                            }
+                          }
+                      }
+                  ],
                   \"loader\": {
                       \"module\": \"./lib/loaders/elastic-resource-loader\",
                       \"config\": {
