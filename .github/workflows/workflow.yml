@@ -19,8 +19,10 @@ jobs:
     name: Get some info
     runs-on: ubuntu-latest
     env:
-      multi-line: |
+      ML: |
         I can has "quotes"?
+      REGULAR: UNLEADED
+      UNLEADED: "Premium"
     services:
       elasticsearch:
         image: elasticsearch:7.9.2
@@ -43,7 +45,9 @@ jobs:
           echo "                ES Port: ${{ job.services.elasticsearch.ports[9200] }}"
 
 
-          echo -e "Multi-line ${multi-line}"
+          echo -e "Multi-line ${ML}"
+          echo -e " REGULAR: ${REGULAR}"
+          echo -e "UNLEADED: ${UNLEADED}"
 
 
 
