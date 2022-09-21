@@ -118,7 +118,7 @@ jobs:
                   "loader": {
                       "module": "./lib/loaders/elastic-resource-loader",
                       "config": {
-                        "eshosts": [ "http://localhost:${{ job.services.elasticsearch.ports[9200] }}" ],
+                        "eshosts": [ "http://localhost:9200" ],
                         "daysToKeep": 10,
                         "aliasName": "r4r_v1",
                         "mappingPath": "es-mappings/mappings.json",
