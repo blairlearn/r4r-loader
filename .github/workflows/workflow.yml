@@ -43,39 +43,36 @@ jobs:
         run: |
           CONFIG_OVERRIDE="
             {
-              "pipeline": {
-                  "source": {
-                      "module": "./lib/sources/github-resource-source",
-                      "config": {
-                          "repoUrl": "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}",
-                          "branchName": "${GITHUB_REF}",
-                          "resourcesPath": "/resources",
-                          "authentication": {
-                              "token": "${GITHUB_TOKEN}"
+              \"pipeline\": {
+                  \"source\": {
+                      \"config\": {
+                          \"repoUrl\": \"${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}\",
+                          \"branchName\": \"${GITHUB_REF}\",
+                          \"resourcesPath\": \"/integration-tests/data/resources\",
+                          \"authentication\": {
+                              \"token\": \"${GITHUB_TOKEN}\"
                           }
                       }
                   },
-                  "transformers": [
+                  \"transformers\": [
                       {
-                          "module": "./lib/transformers/netlifymd-resource-transformer",
-                          "config": {
-                            "mappingUrls": {
-                                "docs": "https://raw.githubusercontent.com/nciocpl/r4r-content/master/data/docs.json",
-                                "researchAreas": "https://raw.githubusercontent.com/nciocpl/r4r-content/master/data/researchAreas.json",
-                                "researchTypes": "https://raw.githubusercontent.com/nciocpl/r4r-content/master/data/researchTypes.json",
-                                "toolTypes": "https://raw.githubusercontent.com/nciocpl/r4r-content/master/data/toolTypes.json"
+                          \"config\": {
+                            \"mappingUrls\": {
+                                \"docs\": \"https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_REF}/integration-tests/data/data/docs.json\",
+                                \"researchAreas\": \"https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_REF}/integration-tests/data/data/researchAreas.json\",
+                                \"researchTypes\": \"https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_REF}/integration-tests/data/data/researchTypes.json\",
+                                \"toolTypes\": \"https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_REF}/integration-tests/data/data/toolTypes.json\"
                             }
                           }
                       }
                   ],
-                  "loader": {
-                      "module": "./lib/loaders/elastic-resource-loader",
-                      "config": {
-                        "eshosts": [ "http://localhost:${{ job.services.elasticsearch.ports[9200] }}" ],
-                        "daysToKeep": 10,
-                        "aliasName": "r4r_v1",
-                        "mappingPath": "es-mappings/mappings.json",
-                        "settingsPath": "es-mappings/settings.json"
+                  \"loader\": {
+                      \"config\": {
+                        \"eshosts\": [ \"http://localhost:${{ job.services.elasticsearch.ports[9200] }}\" ],
+                        \"daysToKeep\": 10,
+                        \"aliasName\": \"r4r_v1\",
+                        \"mappingPath\": \"es-mappings/mappings.json\",
+                        \"settingsPath\": \"es-mappings/settings.json\"
                       }
                   }
               }
