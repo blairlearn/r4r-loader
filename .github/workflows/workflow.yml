@@ -115,7 +115,7 @@ jobs:
 
       - name: Run the loader to put data in Elasticsearch.
         run:  |
-          CONFIG_NODE="
+          export CONFIG_NODE="
             {
               \"pipeline\": {
                   \"source\": {
@@ -155,6 +155,9 @@ jobs:
               }
             }
           "
+          echo "-----------"
+          echo "CN: ${CONFIG_NODE}"
+          echo "-----------"
           node index.js
 
       - name: Run tests to check whether data was loaded as expected.
