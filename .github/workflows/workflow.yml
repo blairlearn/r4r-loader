@@ -38,7 +38,7 @@ jobs:
           echo "GITHUB_REPOSITORY_OWNER: ${GITHUB_REPOSITORY_OWNER}"
           echo " "
           echo "                ES Port: ${{ job.services.elasticsearch.ports[9200] }}"
-          jq -version
+          jq --version
 
       - name: config override test
         run: |
