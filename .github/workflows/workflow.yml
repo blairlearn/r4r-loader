@@ -56,7 +56,8 @@ jobs:
     runs-on: ${{ matrix.operating-system }}
     strategy:
       matrix:
-        operating-system: [ubuntu-latest, windows-latest, macOS-latest]
+        #operating-system: [ubuntu-latest, windows-latest, macOS-latest]
+        operating-system: [ubuntu-latest]
 
     steps:
       - name: Get the code
@@ -115,7 +116,7 @@ jobs:
 
       - name: Run the loader to put data in Elasticsearch.
         run:  |
-          export CONFIG_NODE="
+          export NODE_CONFIG="
             {
               \"pipeline\": {
                   \"source\": {
@@ -156,7 +157,7 @@ jobs:
             }
           "
           echo "-----------"
-          echo "CN: ${CONFIG_NODE}"
+          echo "CN: ${NODE_CONFIG}"
           echo "-----------"
           node index.js
 
