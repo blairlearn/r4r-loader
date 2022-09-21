@@ -113,7 +113,7 @@ jobs:
                       \"module\": \"./lib/sources/github-resource-source\",
                       \"config\": {
                           \"repoUrl\": \"${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}\",
-                          \"branchName\": \"${GITHUB_REF_NAME}\",
+                          \"branchName\": \"${GIT_SHA}\",
                           \"resourcesPath\": \"/integration-tests/data/resources\",
                           \"authentication\": {
                               \"token\": \"${GITHUB_TOKEN}\"
