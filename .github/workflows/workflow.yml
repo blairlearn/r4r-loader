@@ -149,7 +149,7 @@ jobs:
           echo "-----------"
           echo "CN: ${NODE_CONFIG}"
           echo "-----------"
-          rem node index.js
+          # node index.js
 
       - name: Run tests to check whether data was loaded as expected.
         run: |
